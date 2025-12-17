@@ -8,6 +8,6 @@ export async function GET() {
     logs_count: systemState.logs.length,
     tools_count: systemState.tools.length,
     advanced_mode: systemState.advanced_mode,
-    groq_enabled: !!process.env.GROQ_API_KEY
+    llm_enabled: !!process.env.HUGGINGFACE_API_KEY
   })
 }

@@ -1,21 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { systemState, logActivity } from '@/lib/state'
 import { getDQNResponse } from '@/lib/dqn'
-import { generateGroqResponse } from '@/lib/groq'
+import { generateLLMResponse } from '@/lib/llm'
 
 export async function POST(request: NextRequest) {
   const { message } = await request.json()
   
   const dqnResult = getDQNResponse(message, systemState.advanced_mode)
   
-  // Generate natural language response using Groq
-  const groqResponse = await generateGroqResponse(
+  const llmResponse = await generateLLMResponse(
     message,
     systemState.prompt,
     dqnResult.reasoning
   )
   
-  const finalResponse = `[ULTIMA AI - ${systemState.advanced_mode ? 'Advanced' : 'Simple'} DQN Mode]\n\nDQN Analysis: ${dqnResult.reasoning}\n\n${groqResponse}`
+  const finalResponse = `[ULTIMA - ${systemState.advanced_mode ? 'ADVANCED' : 'SIMPLE'} DQN]\n\n${llmResponse}`
   
   logActivity('chat', `User query: ${message.slice(0, 50)}...`)
   

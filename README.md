@@ -1,30 +1,33 @@
-# 🚀 ULTIMA AI - Self-Referencing AI Terminal
+# ULTIMA - Self-Referencing Terminal
 
-Ultima is an advanced self-referencing AI with Deep Q-Network reasoning capabilities, built for continuous learning and self-improvement.
+ULTIMA is an advanced self-referencing AI with Deep Q-Network reasoning capabilities, built for continuous learning and self-improvement.
 
-## ✨ Features
+## Features
 
-- **🧠 Self-Referencing AI**: Dynamic system prompt updates and self-modification
-- **🔬 DQN Reasoning**: Advanced Deep Q-Network for cognitive processing
-- **🛠️ Tool Creation**: Generate and manage custom tools dynamically  
-- **📊 Real-time Monitoring**: Live activity logs and system status
-- **🎨 Futuristic UI**: Black/red metallic terminal with scanlines
-- **⚡ Typewriter Effect**: Realistic AI response animation
-- **🪙 Token Integration**: Built-in token economy support
+- **Self-Referencing AI**: Dynamic system prompt updates and self-modification
+- **DQN Reasoning**: Advanced Deep Q-Network for cognitive processing
+- **Tool Creation**: Generate and manage custom tools dynamically  
+- **Real-time Monitoring**: Live activity logs and system status
+- **Sleek Terminal UI**: Minimalist black/red interface
+- **Free LLM Integration**: Hugging Face Mistral-7B via Inference API
+- **Token Integration**: Built-in token economy support
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ├── app/
 │   ├── page.tsx        # Main terminal component
 │   ├── layout.tsx      # Root layout
 │   └── api/            # Next.js API routes
-├── dqn_core.py         # Simple DQN implementation
-├── torch_dqn.py        # Advanced PyTorch DQN (optional)
+├── lib/
+│   ├── dqn.ts          # DQN implementation
+│   ├── llm.ts          # Hugging Face LLM client
+│   ├── state.ts        # State management
+│   └── training.ts     # DQN training utilities
 └── package.json        # Dependencies
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Local Development
 ```bash
@@ -34,69 +37,75 @@ npm install
 npm run dev
 ```
 
+### Setup LLM (Optional)
+Get a free Hugging Face API key from https://huggingface.co/settings/tokens
+
+Add to `.env.local`:
+```
+HUGGINGFACE_API_KEY=your-key-here
+```
+
 ### Vercel Deployment
 ```bash
 npm i -g vercel
 vercel --prod
 ```
 
-## 🎮 Usage
+## Usage
 
-1. **Chat**: Interact with Ultima through the terminal
-2. **Upgrade**: Click "Upgrade" to modify system prompts
-3. **Advanced Mode**: Toggle PyTorch DQN for enhanced reasoning
-4. **Monitor**: View real-time logs, tools, and upgrades in sidebar
+1. **Chat**: Interact with ULTIMA through the terminal
+2. **Upgrade**: Click "UPGRADE" to modify system prompts
+3. **Mode**: Toggle between Simple/Advanced DQN
+4. **Tool**: Create new tools dynamically
+5. **Train**: Train DQN with custom data
 
-## 🔧 API Endpoints
+## API Endpoints
 
 - `POST /api/chat` - Chat with AI
-- `POST /api/upgrade/prompt` - Update system prompt
+- `POST /api/upgrade` - Update system prompt
 - `POST /api/create-tool` - Create new tool
+- `POST /api/train` - Train DQN agent
 - `GET /api/status` - System status
 - `GET /api/logs` - Activity logs
 - `GET /api/tools` - Created tools
 
-## 🪙 Token Integration
+## Token Integration
 
 **Token Address**: `9bzJn2jHQPCGsYKapFvytJQcbaz5FN2TtNB43jb1pump`
 
-Ultima is designed to integrate with token-based economies for AI services and capabilities.
+ULTIMA is designed to integrate with token-based economies for AI services and capabilities.
 
-## 🧠 DQN System
+## DQN System
 
-Ultima uses a dual-mode DQN system:
+ULTIMA uses a dual-mode DQN system:
 
-- **Simple DQN**: Pure Python Q-learning for basic reasoning
-- **PyTorch DQN**: Neural network with replay buffer for advanced cognition
+- **Simple DQN**: Pure JavaScript Q-learning for basic reasoning
+- **Advanced DQN**: Neural network with replay buffer for advanced cognition
 
 The AI learns from every interaction, continuously improving its responses and reasoning capabilities.
 
-## 🎨 UI Features
+## LLM Integration
 
-- **Scanline Effects**: Authentic terminal aesthetics
-- **Typewriter Animation**: Realistic AI response rendering
-- **Real-time Updates**: Live system monitoring
-- **Responsive Design**: Works on desktop and mobile
+ULTIMA integrates with Hugging Face Inference API for free LLM usage:
 
-## 🔮 Self-Improvement
+- **Model**: Mistral-7B-Instruct-v0.2
+- **Provider**: Hugging Face
+- **Cost**: Free tier available
+- **Fallback**: Intelligent local responses without API key
 
-Ultima can:
+## Self-Improvement
+
+ULTIMA can:
 - Modify its own system prompts
 - Create new tools and capabilities
 - Learn from user interactions
 - Upgrade its reasoning algorithms
 - Track its own evolution
 
-## 📝 License
+## License
 
 MIT License - Feel free to modify and distribute.
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch
-3. Submit pull request
-
 ---
 
-**Ultima AI** - The future of self-referencing artificial intelligence.
+**ULTIMA** - The future of self-referencing artificial intelligence.

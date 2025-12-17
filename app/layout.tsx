@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'ULTIMA AI - Self-Referencing Terminal',
+  title: 'ULTIMA - Self-Referencing Terminal',
   description: 'Advanced self-referencing AI with DQN reasoning capabilities',
 }
 

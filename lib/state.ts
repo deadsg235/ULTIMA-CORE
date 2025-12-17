@@ -14,7 +14,7 @@ interface SystemState {
 }
 
 export const systemState: SystemState = {
-  prompt: 'You are ULTIMA, an advanced self-referencing AI with DQN reasoning capabilities.',
+  prompt: 'You are ULTIMA, an advanced self-referencing artificial intelligence with DQN reasoning capabilities.',
   logs: [],
   tools: [],
   advanced_mode: false
