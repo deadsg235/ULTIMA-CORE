@@ -7,6 +7,7 @@ export async function GET() {
     system_prompt: systemState.prompt,
     logs_count: systemState.logs.length,
     tools_count: systemState.tools.length,
-    advanced_mode: systemState.advanced_mode
+    advanced_mode: systemState.advanced_mode,
+    groq_enabled: !!process.env.GROQ_API_KEY
   })
 }

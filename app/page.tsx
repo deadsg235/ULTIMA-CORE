@@ -141,6 +141,27 @@ export default function UltimaTerminal() {
     }
   }
 
+  const testGroq = async () => {
+    const messages = [
+      { role: 'system', content: 'You are ULTIMA AI, a self-referencing AI with DQN reasoning.' },
+      { role: 'user', content: 'Demonstrate your capabilities' }
+    ]
+    
+    try {
+      const response = await fetch('/api/groq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages, model: 'llama3-8b-8192' })
+      })
+      
+      const data = await response.json()
+      setMessages(prev => [...prev, `Groq Test: ${data.response}`])
+      
+    } catch (error) {
+      setMessages(prev => [...prev, 'Groq test failed'])
+    }
+  }
+
   return (
     <div className="container">
       <div className="main-terminal">
@@ -155,6 +176,7 @@ export default function UltimaTerminal() {
           <button className="btn" onClick={toggleMode}>Advanced Mode</button>
           <button className="btn" onClick={createTool}>Create Tool</button>
           <button className="btn" onClick={trainDQN}>Train DQN</button>
+          <button className="btn" onClick={testGroq}>Test Groq</button>
           <button className="btn" onClick={() => setMessages([])}>Clear</button>
         </div>
         
@@ -181,6 +203,7 @@ export default function UltimaTerminal() {
         <div className="sidebar-section">
           <h3>📊 System Status</h3>
           <div>Mode: {status.advanced_mode ? 'Advanced' : 'Simple'} DQN</div>
+          <div>Groq: {status.groq_enabled ? 'Active' : 'Inactive'}</div>
           <div>Tools: {status.tools_count || 0}</div>
           <div>Logs: {status.logs_count || 0}</div>
         </div>
