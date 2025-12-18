@@ -10,6 +10,12 @@ export async function POST() {
   return NextResponse.json({ 
     success: true, 
     mode, 
-    advanced: systemState.advanced_mode 
+    advanced: systemState.advanced_mode,
+    features: {
+      neural_network: systemState.advanced_mode,
+      replay_buffer: systemState.advanced_mode,
+      target_network: systemState.advanced_mode,
+      epsilon_greedy: true
+    }
   })
 }

@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     dqnResult.reasoning
   )
   
-  const finalResponse = `[ULTIMA - ${systemState.advanced_mode ? 'ADVANCED' : 'SIMPLE'} DQN]\n\n${llmResponse}`
+  const finalResponse = llmResponse || `Query received: ${message}\n\nDQN Analysis: ${dqnResult.reasoning}\n\nProcessing with ${systemState.advanced_mode ? 'advanced neural network' : 'simple Q-learning'} reasoning.`
   
   logActivity('chat', `User query: ${message.slice(0, 50)}...`)
   

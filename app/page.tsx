@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 export default function UltimaTerminal() {
-  const [messages, setMessages] = useState<string[]>(['ULTIMA INITIALIZED', 'System Status: ACTIVE', 'DQN Core: LOADED', 'Ready for interaction'])
+  const [messages, setMessages] = useState<string[]>(['ULTIMA INITIALIZED', 'System Status: ACTIVE', 'DQN Core: LOADED', 'Mode: SIMPLE DQN', 'Ready for interaction'])
   const [input, setInput] = useState('')
   const [status, setStatus] = useState<any>({})
   const [logs, setLogs] = useState<any[]>([])
@@ -85,7 +85,10 @@ export default function UltimaTerminal() {
     try {
       const response = await fetch('/api/toggle-mode', { method: 'POST' })
       const data = await response.json()
-      setMessages(prev => [...prev, `Mode: ${data.mode || 'Simple DQN'}`])
+      const modeDisplay = data.advanced ? 'ADVANCED DQN' : 'SIMPLE DQN'
+      setMessages(prev => [...prev, `Mode switched to: ${modeDisplay}`])
+      setMessages(prev => [...prev, `Neural Network: ${data.advanced ? 'ACTIVE' : 'INACTIVE'}`])
+      setMessages(prev => [...prev, `Replay Buffer: ${data.advanced ? 'ENABLED' : 'DISABLED'}`])
       updateSidebar()
     } catch (error) {
       setMessages(prev => [...prev, 'Mode toggle failed'])
@@ -153,7 +156,9 @@ export default function UltimaTerminal() {
         
         <div className="controls">
           <button className="btn" onClick={upgradePrompt}>UPGRADE</button>
-          <button className="btn" onClick={toggleMode}>MODE</button>
+          <button className="btn" onClick={toggleMode}>
+            {status.advanced_mode ? 'ADVANCED' : 'SIMPLE'}
+          </button>
           <button className="btn" onClick={createTool}>TOOL</button>
           <button className="btn" onClick={trainDQN}>TRAIN</button>
           <button className="btn" onClick={() => setMessages([])}>CLEAR</button>
@@ -327,11 +332,16 @@ export default function UltimaTerminal() {
           font-size: 11px;
           letter-spacing: 1px;
           transition: all 0.2s;
+          min-width: 80px;
         }
         
         .btn:hover {
           background: #ff0000;
           color: #000;
+        }
+        
+        .btn:active {
+          transform: scale(0.95);
         }
         
         .sidebar-section {

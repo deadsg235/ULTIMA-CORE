@@ -191,25 +191,21 @@ export function getDQNResponse(message: string, useAdvanced: boolean = false): {
     const action = advancedDQN.selectAction(state)
     const confidence = advancedDQN.getConfidence(state)
     
-    // Simulate learning from interaction
-    const reward = 1.0 // Positive reward for interaction
+    const reward = 1.0
     const nextState = advancedDQN.encodeState('response')
     advancedDQN.buffer.add(state, action, reward, nextState, false)
     advancedDQN.train()
     
-    const response = `[ULTIMA AI - Advanced DQN Mode]\n\nQuery: ${message}\n\nProcessing with Neural Network DQN (Action: ${action}, Confidence: ${confidence.toFixed(3)})\n\nI am ULTIMA, continuously learning through advanced neural network reasoning. My neural pathways are evolving with each interaction.`
-    
     return {
-      response,
-      reasoning: `Advanced DQN (Action: ${action}, Confidence: ${confidence.toFixed(3)})`
+      response: '',
+      reasoning: `Advanced DQN | Action: ${action} | Confidence: ${confidence.toFixed(3)} | Buffer: ${advancedDQN.buffer.memory.length}`
     }
   } else {
     const score = simpleDQN.getReasoningScore(message)
-    const response = `[ULTIMA AI - Simple DQN Mode]\n\nQuery: ${message}\n\nProcessing with Simple DQN (Score: ${score.toFixed(2)})\n\nI am ULTIMA, continuously learning and evolving through Q-learning reasoning. How may I assist you?`
     
     return {
-      response,
-      reasoning: `Simple DQN (Score: ${score.toFixed(2)})`
+      response: '',
+      reasoning: `Simple DQN | Score: ${score.toFixed(2)} | Q-Learning Active`
     }
   }
 }

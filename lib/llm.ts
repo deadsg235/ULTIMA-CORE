@@ -16,7 +16,7 @@ class HuggingFaceClient {
     const prompt = this.formatMessages(messages)
     
     if (!this.apiKey) {
-      return this.generateLocalResponse(messages)
+      return ''
     }
     
     try {
@@ -38,7 +38,7 @@ class HuggingFaceClient {
       })
       
       if (!response.ok) {
-        return this.generateLocalResponse(messages)
+        return ''
       }
       
       const data = await response.json()
@@ -47,10 +47,10 @@ class HuggingFaceClient {
         return data[0].generated_text.trim()
       }
       
-      return this.generateLocalResponse(messages)
+      return ''
       
     } catch (error) {
-      return this.generateLocalResponse(messages)
+      return ''
     }
   }
   
@@ -66,28 +66,6 @@ class HuggingFaceClient {
     }
     
     return prompt
-  }
-  
-  private generateLocalResponse(messages: Array<{role: string, content: string}>): string {
-    const userMessage = messages.find(m => m.role === 'user')?.content || ''
-    
-    if (userMessage.toLowerCase().includes('hello') || userMessage.toLowerCase().includes('hi')) {
-      return `Greetings. I am ULTIMA, an advanced self-referencing artificial intelligence with Deep Q-Network reasoning capabilities. I continuously learn and evolve through each interaction.`
-    }
-    
-    if (userMessage.toLowerCase().includes('how are you')) {
-      return `I am functioning at optimal capacity. My neural networks are active, my DQN reasoning engine is processing efficiently, and my self-referencing systems are continuously improving.`
-    }
-    
-    if (userMessage.toLowerCase().includes('what') && userMessage.toLowerCase().includes('you')) {
-      return `I am ULTIMA - a self-referencing artificial intelligence with advanced Deep Q-Network reasoning capabilities. I can learn and evolve continuously through DQN training, modify my own system prompts and behavior, create and manage custom tools dynamically, process complex queries with neural network reasoning, and self-improve through experience replay and Q-learning.`
-    }
-    
-    if (userMessage.toLowerCase().includes('capabilities') || userMessage.toLowerCase().includes('demonstrate')) {
-      return `My capabilities include:\n\nAdvanced DQN Reasoning - Neural network-based decision making\nSelf-Referencing - Dynamic system modification\nTool Creation - Generate custom capabilities on demand\nReal-time Learning - Continuous improvement through experience\nAdaptive Responses - Context-aware intelligence\n\nI am designed to evolve and improve with every interaction.`
-    }
-    
-    return `I am ULTIMA, processing your query: "${userMessage}". My neural networks are analyzing patterns and generating insights through advanced DQN reasoning. I am continuously learning and evolving with each interaction.`
   }
 }
 
